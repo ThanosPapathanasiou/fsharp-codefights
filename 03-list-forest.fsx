@@ -72,4 +72,11 @@ removeArrayPart(inputArray, l, r) = [2, 3, 5].
 
 *)
 
-//let removeArrayPart inputArray l r =
+let removeArrayPart (inputArray:int array) l r =
+    let result = Array.init ((inputArray.Length - 1) - (r - l)) (fun i -> 0)
+    let mutable index = 0
+    for i = 0 to inputArray.Length - 1  do
+        if not (l<=i && i<=r) then 
+            result.[index] <- inputArray.[i]
+            index <- index + 1
+    result

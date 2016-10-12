@@ -39,3 +39,36 @@ let arrayPacking (a:int array) =
     for i=a.Length downto 1  do
         ret <- ret ||| (a.[i-1] <<< ( (i-1) * 8))
     ret
+
+(* range bit count
+
+You are given two numbers a and b where 0 ≤ a ≤ b. Imagine you construct an array of all the integers from a to b inclusive. You need to count the number of 1s in the binary representations of all the numbers in the array.
+Example
+For a = 2 and b = 7, the output should be
+rangeBitCount(a, b) = 11.
+Given a = 2 and b = 7 the array is: [2, 3, 4, 5, 6, 7]. Converting the numbers to binary, we get [10, 11, 100, 101, 110, 111], which contains 1 + 2 + 1 + 2 + 2 + 3 = 11 1s.
+
+*)
+open System
+let rangeBitCount a b = 
+    let onesInString s = 
+        s |> Seq.filter(fun c -> c = '1' ) |> Seq.length 
+    ([|a .. b|]:int array)
+    |> Array.map (fun x -> Convert.ToString (x, 2))
+    |> Array.map onesInString
+    |> Array.sum
+
+
+(* mirror bits
+
+Reverse the order of the bits in a given integer.
+
+Example
+For a = 97, the output should be
+mirrorBits(a) = 67.
+97 equals to 1100001 in binary, which is 1000011 after mirroring, and that is 67 in base 10.
+For a = 8, the output should be
+mirrorBits(a) = 1.
+
+ *)
+
