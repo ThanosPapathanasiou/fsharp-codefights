@@ -110,3 +110,56 @@ let isSmooth (arr:int array) =
         else (arr.[(arr.Length / 2) - 1] + arr.[(arr.Length / 2)])
     (middle = arr.[0]) && (middle = arr.[arr.Length - 1])
 
+(* Replace Middle
+
+We define the middle of the array arr as follows:
+
+if arr contains an odd number of elements, its middle is the element whose index number is the same when counting from the beginning of the array and from its end;
+if arr contains an even number of elements, its middle is the sum of the two elements whose index numbers when counting from the beginning and from the end of the array differ by one.
+Given array arr, your task is to find its middle, and, if it consists of two elements, replace those elements with the value of middle. Return the resulting array as the answer.
+
+Example
+
+For arr = [7, 2, 2, 5, 10, 7], the output should be
+replaceMiddle(arr) = [7, 2, 7, 10, 7].
+
+The middle consists of two elements, 2 and 5. These two elements should be replaced with their sum, i.e. 7.
+
+For arr = [-5, -5, 10], the output should be
+replaceMiddle(arr) = [-5, -5, 10].
+
+The middle is defined as a single element -5, so the initial array with no changes should be returned.
+
+*)
+
+let replaceMiddle (arr:int array) =
+    if arr.Length % 2 = 1 then arr
+    else 
+        let result = Array.create (arr.Length - 1) 0
+        let m = ((arr.Length / 2) - 1)
+        let v = (arr.[m] + arr.[m + 1])
+        Array.blit arr 0 result 0 m
+        Array.blit [|v|] 0 result m 1
+        Array.blit arr (m + 2) result (m + 1) m
+        result
+
+(* Make Array Consecutive 2
+
+Given an array of integers, we need to find the number of "holes" that need to be filled such that it contains all the integers from some range.
+
+Example
+
+For sequence = [6, 2, 3, 8], the output should be
+makeArrayConsecutive2(sequence) = 3.
+
+We need to add in 4, 5 and 7.
+*)
+
+let makeArrayConsecutive2 (sequence:int array) =
+    let inline exists (arr:int array) (i:int) = 
+        arr |> Array.exists (fun x -> x = i) 
+    let min = sequence |> Array.min
+    let max = sequence |> Array.max
+    [|min .. max|]
+    |> Array.filter (fun x -> not (exists sequence x)) 
+    |> Array.length 
