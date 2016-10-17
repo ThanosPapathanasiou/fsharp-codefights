@@ -1,3 +1,5 @@
+open System
+
 (* kill the k-th bit
 
 In order to stop the Mad Coder evil genius you need to decipher the encrypted message he sent to his minions. The message contains several numbers that, when typed into a supercomputer, will launch a missile into the sky blocking out the sun, and making all the people on Earth grumpy and sad.
@@ -49,7 +51,7 @@ rangeBitCount(a, b) = 11.
 Given a = 2 and b = 7 the array is: [2, 3, 4, 5, 6, 7]. Converting the numbers to binary, we get [10, 11, 100, 101, 110, 111], which contains 1 + 2 + 1 + 2 + 2 + 3 = 11 1s.
 
 *)
-open System
+
 let rangeBitCount a b = 
     let onesInString s = 
         s |> Seq.filter(fun c -> c = '1' ) |> Seq.length 
@@ -72,3 +74,28 @@ mirrorBits(a) = 1.
 
  *)
 
+let mirrorBits (a:int) =
+    let reverseString (s:string) = new string(Array.rev (s.ToCharArray()))
+    Convert.ToString (a, 2)
+    |> reverseString
+    |> (fun x -> Convert.ToInt32 (x, 2))
+
+
+(* second-rightmost zero bit
+
+Presented with the integer n, find the 0-based position of the second rightmost zero bit in its binary representation (it is guaranteed that such a bit exists), counting from right to left.
+
+Return the value of 2position_of_the_found_bit.
+
+Example
+
+For n = 37, the output should be
+secondRightmostZeroBit(n) = 8.
+
+3710 = 1001012. The second rightmost zero bit is at position 3 (0-based) from the right in the binary representation of n.
+Thus, the answer is 23 = 8.
+
+*)
+
+let secondRightmostZeroBit n =
+    0
